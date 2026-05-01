@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container"></div>
+  <script>
+    function printDetails(products){
+      const container = document.querySelector(".container");
+      products.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.classList.add("product-card");
+        productCard.innerHTML = `
+          <img src="${product.thumbnail}" alt="${product.title}" class="product-image">
+          <h3 class="title">${product.title}</h3>
+          <h3 class="description">${product.description}</h3>
+          <h3 class="price"><span class="prices">Rs:-</span>${product.price}</h3>
+          <h3 class="price"><span class="prices">Rating:-</span>${product.rating}</h3>
+        `;
+        container.appendChild(productCard);
+      })
+    }
+
+    const productDetails = async ()=>{
+      const products = await fetch("https://dummyjson.com/products");
+      const data  = await products.json();
+      printDetails(data.products);
+    }
+    productDetails();
+    
+  </script>
+</body>
+</html>
