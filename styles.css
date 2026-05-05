@@ -35,3 +35,43 @@
   font-size:10px;
   color:red;
 }
+.header{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid gray;
+  background-color: rgb(255, 0, 0);
+  color: white;
+}
+.right{
+  display:flex;
+  gap:20px;
+  margin-right: 10px;
+}
+.image{
+  width:100px;
+}
+.parts{
+  font-size: 20px;
+}
+.parts:hover{
+  color: black;
+  cursor: pointer;
+  border-bottom: 2px solid white;
+}
+.search{
+  width:200px;
+  height:30px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+#rating{
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: gray;
+  color: white;
+}

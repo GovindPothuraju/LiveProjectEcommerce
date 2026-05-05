@@ -7,8 +7,55 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <header>
+    <div class="header">
+      <div ><img class="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/65c5da9f878952603e370d03_Myntra-Logo_1.svg/1280px-65c5da9f878952603e370d03_Myntra-Logo_1.svg.png" alt=""></div>
+      <div>
+        <label for="search">Search : </label>
+        <input type="text" placeholder="Search for products, brands and more" class="search">
+        <button class="searchbtn" click="searchProduct()">Search</button>
+      </div>
+      <div class="right">
+        <div class="parts">Contact</div>
+        <div class="parts">About</div>
+        <div class="parts">Cart</div>
+      </div>
+    </div>
+  </header>
+  <select name="Ratings" id="rating">
+    <option value="0">Select Rating</option>
+    <option value="4">4 and above</option>
+    <option value="3">3 and above</option>
+    <option value="2">2 and above</option>
+  </select>
   <div class="container"></div>
   <script>
+    const allProducts =[];
+    const searchInput = document.querySelector(".search");
+    const btn = document.querySelector(".searchbtn");
+    const rating = document.querySelector("#rating");
+    btn.addEventListener("click",()=>{
+      document.querySelector(".container").innerHTML = "";
+      const searchTerm = searchInput.value.toLowerCase();
+      const filtered = allProducts.filter(product => product.title.toLowerCase().includes(searchTerm));
+      printDetails(filtered);
+    });
+    
+    rating.addEventListener("change",()=>{
+      const selectedRating = parseFloat(rating.value);
+      if(selectedRating!=0){
+        filterRatings(selectedRating);
+      }else{
+        printDetails(allProducts);
+      }
+    });
+    function filterRatings(rating){
+      document.querySelector(".container").innerHTML = "";
+      const filtered = allProducts.filter(product => product.rating >= rating);
+      printDetails(filtered);
+    }
+      
+
     function printDetails(products){
       const container = document.querySelector(".container");
       products.forEach(product => {
@@ -28,9 +75,12 @@
     const productDetails = async ()=>{
       const products = await fetch("https://dummyjson.com/products");
       const data  = await products.json();
-      printDetails(data.products);
+      allProducts.push(...data.products);
+      printDetails(allProducts);
     }
     productDetails();
+
+    
     
   </script>
 </body>
